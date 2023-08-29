@@ -14,14 +14,15 @@ public class OrdemItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    private OrderItemPk id;
+    @EmbeddedId // id composto
+    private OrderItemPk id = new OrderItemPk();
     private Integer quantity;
     private Double price;
 
     public OrdemItem(){}
 
     public OrdemItem(Order order, Product product,Integer quantity, Double price) {
+        super();
         this.quantity = quantity;
         this.price = price;
         id.setOrder(order);

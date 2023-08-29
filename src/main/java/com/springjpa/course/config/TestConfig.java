@@ -1,14 +1,8 @@
 package com.springjpa.course.config;
 
-import com.springjpa.course.entities.Category;
-import com.springjpa.course.entities.Order;
-import com.springjpa.course.entities.Product;
-import com.springjpa.course.entities.User;
+import com.springjpa.course.entities.*;
 import com.springjpa.course.enums.OrderStatus;
-import com.springjpa.course.repositories.CategoryRepository;
-import com.springjpa.course.repositories.OrderRepository;
-import com.springjpa.course.repositories.ProductRepository;
-import com.springjpa.course.repositories.UserRepository;
+import com.springjpa.course.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,11 +26,15 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
-    public TestConfig(UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository, ProductRepository productRepository) {
+
+    @Autowired
+    private OrdemItemRepository ordemItemRepository;
+    public TestConfig(UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository, ProductRepository productRepository, OrdemItemRepository ordemItemRepository) {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
+        this.ordemItemRepository = ordemItemRepository;
     }
 
 
@@ -78,5 +76,12 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u1,u2));
         orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+
+        OrdemItem oi1 = new OrdemItem(o1, p1, 2, p1.getPrice());
+        OrdemItem oi2 = new OrdemItem(o1, p3, 1, p3.getPrice());
+        OrdemItem oi3 = new OrdemItem(o2, p3, 2, p3.getPrice());
+        OrdemItem oi4 = new OrdemItem(o3, p5, 2, p5.getPrice());
+
+        ordemItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi3,oi4));
     }
 }
