@@ -1,5 +1,6 @@
 package com.springjpa.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springjpa.course.entities.pk.OrderItemPk;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -35,6 +36,7 @@ public class OrdemItem implements Serializable {
     public void setOrder(Order order){
         id.setOrder(order);
     }
+
     public Product getProduct(){
         return id.getProduct();
     }
